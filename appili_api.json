@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "APIs documentation is fun. The below is CRUD API developed using AWS tools. Anyone can use this APIs in their project., Please contact me if you get errors with CORS issues.",
+    "description": "Developing APIs is fun, and documenting them using swagger is even more fun. The below is CRUD API developed using AWS tools. Anyone can use this APIs in their project., Please contact me if you get errors with CORS issues.",
     "version": "1.3",
     "title": "Appili OpenSource APIs",
     "contact": {
