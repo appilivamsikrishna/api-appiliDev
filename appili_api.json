@@ -1,0 +1,134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "APIs documentation is fun. The below is CRUD API developed using AWS tools. Anyone can use this APIs in their project., Please contact me if you get errors with CORS issues.",
+    "version": "1.3",
+    "title": "Appili OpenSource APIs",
+    "contact": {
+      "name": "Appili Vamsi Krishna",
+      "url": "https://appili.dev",
+      "email": "appilivamsikrishna@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "https://appili.gives",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "items",
+      "description": "everything about the usage"
+    },
+    { "name": "open", "description": "open source 1" }
+  ],
+  "schemes": ["https", "http"],
+  "paths": {
+    "/items": {
+      "put": {
+        "tags": ["items"],
+        "summary": "Updates exisiting or create new item with id tag",
+        "description": "",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": {
+          "in": "body",
+          "name": "body",
+          "description": "Pet object that needs to be added to the store",
+          "required": true,
+          "schema": { "$ref": "#/definitions/Item" }
+        },
+        "responses": {
+          "400": { "description": "Invalid ID supplied" },
+          "404": { "description": "Pet not found" },
+          "405": { "description": "Validation exception" }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": { "type": "apiKey", "name": "api_key", "in": "header" },
+    "appili_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://appili.dev/oauth/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "read:items": "read items",
+        "write:items": "modify items"
+      }
+    }
+  },
+  "definitions": {
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": { "type": "integer", "format": "int32" },
+        "type": { "type": "string" },
+        "message": { "type": "string" }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer", "format": "int64" },
+        "name": { "type": "string" }
+      },
+      "xml": { "name": "Category" }
+    },
+    "Item": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "integer", "format": "int64" },
+        "dataArray": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "xml": { "name": "Item" }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer", "format": "int64" },
+        "name": { "type": "string" }
+      },
+      "xml": { "name": "Tag" }
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer", "format": "int64" },
+        "petId": { "type": "integer", "format": "int64" },
+        "quantity": { "type": "integer", "format": "int32" },
+        "shipDate": { "type": "string", "format": "date-time" },
+        "status": {
+          "type": "string",
+          "description": "Order Status",
+          "enum": ["placed", "approved", "delivered"]
+        },
+        "complete": { "type": "boolean" }
+      },
+      "xml": { "name": "Order" }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer", "format": "int64" },
+        "username": { "type": "string" },
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "phone": { "type": "string" },
+        "userStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User Status"
+        }
+      },
+      "xml": { "name": "User" }
+    }
+  }
+}
